@@ -33,5 +33,5 @@ jobs:
           MYSQL_ROOT_USER: ${{ secrets.MYSQL_ROOT_USER }}
           MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
         run: |
-          docker-compose build
-          docker-compose push
+          docker compose build
+          docker compose push
