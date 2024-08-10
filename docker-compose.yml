@@ -17,7 +17,7 @@ services:
 
   backend:
     build: .
-    image: saipruthvik460/tms_backend:latest
+    image: saipruthvik460/task-management-sytem/tms_backend:latest
     container_name: tms_backend
     environment:
       SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/${MYSQL_DATABASE}"
