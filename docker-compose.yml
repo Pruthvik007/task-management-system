@@ -17,13 +17,12 @@ services:
 
   backend:
     build: .
+    image: saipruthvik460/tms_backend:latest
     container_name: tms_backend
     environment:
       SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/${MYSQL_DATABASE}"
       MYSQL_USER: ${MYSQL_USER}
-      MYSQL_ROOT_USER: ${MYSQL_ROOT_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       JWT_SECRET: ${JWT_SECRET}
     ports:
       - "8080:8080"
