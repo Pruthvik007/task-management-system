@@ -2,7 +2,6 @@ version: "3.8"
 
 services:
   db:
-    env_file: ".env"
     image: mysql:8.0
     container_name: tms_db
     environment:
@@ -19,7 +18,6 @@ services:
   backend:
     build: .
     container_name: tms_backend
-    env_file: ".env"
     environment:
       SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/${MYSQL_DATABASE}"
       MYSQL_USER: ${MYSQL_USER}
