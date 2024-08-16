@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class AdminController {
-    public String assignTasks() {
-        return null;
-    }
+  public String assignTasks() {
+    return null;
+  }
 }

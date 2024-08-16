@@ -2,12 +2,11 @@ package com.app.taskmanagementsystem.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
@@ -17,57 +16,77 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Task {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false)
-    private String title;
-    @Column(nullable = false)
-    private String description;
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private TaskStatus status;
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TaskPriority priority;
-    @Column(nullable = false)
-    private LocalDateTime dueDate;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    @ToString.Exclude
-    @JsonIgnore
-    private User user;
+  @Column(nullable = false)
+  private String title;
 
-    public Task(String title, String description, TaskStatus status, TaskPriority priority, LocalDateTime dueDate, User user) {
-        this.title = title;
-        this.description = description;
-        this.status = status;
-        this.priority = priority;
-        this.dueDate = dueDate;
-        this.user = user;
-    }
+  @Column(nullable = false)
+  private String description;
 
-    public Task updateTask(Long id, String title, String description, TaskStatus status, TaskPriority priority, LocalDateTime dueDate) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.status = status;
-        this.priority = priority;
-        this.dueDate = dueDate;
+  @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
+  private TaskStatus status;
 
-        return this;
-    }
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private TaskPriority priority;
 
-    public enum TaskStatus {
-        TODO, IN_PROGRESS, DONE
-    }
+  @Column(nullable = false)
+  private LocalDateTime dueDate;
 
-    public enum TaskPriority {
-        HIGH, MEDIUM, LOW
-    }
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+  @ToString.Exclude
+  @JsonIgnore
+  private User user;
+
+  public Task(
+      String title,
+      String description,
+      TaskStatus status,
+      TaskPriority priority,
+      LocalDateTime dueDate,
+      User user) {
+    this.title = title;
+    this.description = description;
+    this.status = status;
+    this.priority = priority;
+    this.dueDate = dueDate;
+    this.user = user;
+  }
+
+  public Task updateTask(
+      Long id,
+      String title,
+      String description,
+      TaskStatus status,
+      TaskPriority priority,
+      LocalDateTime dueDate) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.status = status;
+    this.priority = priority;
+    this.dueDate = dueDate;
+
+    return this;
+  }
+
+  public enum TaskStatus {
+    TODO,
+    IN_PROGRESS,
+    DONE
+  }
+
+  public enum TaskPriority {
+    HIGH,
+    MEDIUM,
+    LOW
+  }
 }
 
 //    private final String createdAt;
 //    private final String updatedAt;
-

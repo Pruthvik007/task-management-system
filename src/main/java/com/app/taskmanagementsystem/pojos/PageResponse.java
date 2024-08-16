@@ -6,6 +6,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Getter
 public class PageResponse<T> extends Response<T> {
-    private int pageNo;
-    private int totalPages;
+  private int pageNo;
+  private int totalPages;
 }

@@ -6,11 +6,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SecurityHelper {
-    private SecurityHelper() {
+  private SecurityHelper() {}
 
-    }
-
-    public static User getLoggedInUser() {
-        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
+  public static User getLoggedInUser() {
+    return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+  }
 }

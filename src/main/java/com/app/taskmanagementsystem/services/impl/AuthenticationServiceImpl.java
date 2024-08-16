@@ -13,17 +13,24 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
-    }
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    return userRepository
+        .findByEmail(username)
+        .orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
+  }
 
-    public User registerCustomer(UserRegisterDto userRegisterDto) {
-        User user = new User(userRegisterDto.getName(), userRegisterDto.getEmail(), passwordEncoder.encode(userRegisterDto.getPassword()), User.UserStatus.ACTIVE, userRegisterDto.getUserRole());
-        return userRepository.save(user);
-    }
+  public User registerCustomer(UserRegisterDto userRegisterDto) {
+    User user =
+        new User(
+            userRegisterDto.getName(),
+            userRegisterDto.getEmail(),
+            passwordEncoder.encode(userRegisterDto.getPassword()),
+            User.UserStatus.ACTIVE,
+            userRegisterDto.getUserRole());
+    return userRepository.save(user);
+  }
 }
-
