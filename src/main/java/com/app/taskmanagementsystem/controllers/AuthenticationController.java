@@ -20,21 +20,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class AuthenticationController {
-    private final AuthenticationManager authenticationManager;
-    private final JwtHelper jwtHelper;
-    private final AuthenticationService authenticationService;
+  private final AuthenticationManager authenticationManager;
+  private final JwtHelper jwtHelper;
+  private final AuthenticationService authenticationService;
 
-    @PostMapping("/register")
-    public Response<User> registerCustomer(@RequestBody @Valid UserRegisterDto userRegisterDto) {
-        return Response.<User>builder().data(authenticationService.registerCustomer(userRegisterDto)).status(Response.Status.SUCCESS).build();
-    }
+  @PostMapping("/register")
+  public Response<User> registerCustomer(@RequestBody @Valid UserRegisterDto userRegisterDto) {
+    return Response.<User>builder()
+        .data(authenticationService.registerCustomer(userRegisterDto))
+        .status(Response.Status.SUCCESS)
+        .build();
+  }
 
-    @PostMapping("/login")
-    public Response<String> login(@RequestBody @Valid UserLoginDto userLoginDto) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(userLoginDto.getEmail(), userLoginDto.getPassword())
-        );
-        return Response.<String>builder().data(jwtHelper.generateToken(authentication.getName())).status(Response.Status.SUCCESS).build();
-    }
+  @PostMapping("/login")
+  public Response<String> login(@RequestBody @Valid UserLoginDto userLoginDto) {
+    Authentication authentication =
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
+                userLoginDto.getEmail(), userLoginDto.getPassword()));
+    return Response.<String>builder()
+        .data(jwtHelper.generateToken(authentication.getName()))
+        .status(Response.Status.SUCCESS)
+        .build();
+  }
 }
-

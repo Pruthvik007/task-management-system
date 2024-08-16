@@ -11,23 +11,20 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SwaggerConfig {
 
-    private SecurityScheme createAPIKeyScheme() {
-        return new SecurityScheme().type(SecurityScheme.Type.HTTP)
-                .bearerFormat("JWT")
-                .scheme("bearer");
-    }
+  private SecurityScheme createAPIKeyScheme() {
+    return new SecurityScheme().type(SecurityScheme.Type.HTTP).bearerFormat("JWT").scheme("bearer");
+  }
 
-    @Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .addSecurityItem(new SecurityRequirement().
-                        addList("Bearer Authentication"))
-                .components(new Components().addSecuritySchemes
-                        ("Bearer Authentication", createAPIKeyScheme()))
-                .info(new Info()
-                        .title("Task Management System API")
-                        .version("1.0")
-                        .description("This API exposes endpoints to manage Tasks of Users."));
-    }
+  @Bean
+  public OpenAPI customOpenAPI() {
+    return new OpenAPI()
+        .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
+        .components(
+            new Components().addSecuritySchemes("Bearer Authentication", createAPIKeyScheme()))
+        .info(
+            new Info()
+                .title("Task Management System API")
+                .version("1.0")
+                .description("This API exposes endpoints to manage Tasks of Users."));
+  }
 }
-
